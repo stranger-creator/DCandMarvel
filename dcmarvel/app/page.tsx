@@ -1,16 +1,18 @@
 "use client"
 import React from 'react';
 import styled from 'styled-components';
+import Navbar from './Compo/Navbar';
 
 const Home: React.FC = () => {
   return (
     <Container>
+      <Navbar></Navbar>
       <BgImage />
-      <Content>
+      <Content >
         <CTA>
           <CTALogoOne src="" alt="" />
           
-          <SignUpButton href='/signup' >GET ALL THERE</SignUpButton>
+          <SignUpButton href='/signin' >GET ALL THERE</SignUpButton>
           <Desc>
           In the timeless battle of Marvel vs DC, iconic heroes collide and extraordinary stories unfold. From the web-swinging Spider-Man to the caped crusader Batman, explore the epic clash of these legendary universes, where imagination knows no bounds.
           </Desc>
@@ -31,6 +33,7 @@ const Content = styled.div`
   position: relative;
   min-height: 100vh;
   box-sizing: border-box;
+  color:black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,14 +44,15 @@ const Content = styled.div`
 `;
 
 const BgImage = styled.div`
-  position: absolute;
-  top: 0;
+  position: fixed;
+  top: 100px;
+  width:100%;
   right: 0;
   left: 0;
   bottom: 0;
   background: url("/images/marveldc.jpg") center/cover no-repeat;
   background-color: rgba(255, 255, 255, 0.6);
-  opacity:30%;
+  opacity:70%;
   z-index: -2;
 `;
 
@@ -90,7 +94,7 @@ const SignUpButton = styled.a`
 `;
 
 const Desc = styled.p`
-  color: hsla(0, 0%, 55%, 1); /* Lighter text color */
+  color: #ffffff; /* Lighter text color */
   font-size: 14px;
   margin: 0 0 24px;
   line-height: 1.5;

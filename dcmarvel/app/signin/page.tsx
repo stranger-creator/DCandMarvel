@@ -1,29 +1,24 @@
-// Import necessary styles or directly add Tailwind CSS classes to your components
 'use client'
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase/firebase"; // Update the path
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/firebase/firebase";
 import { toast } from "sonner";
-
-const Signup = () => {
+import Link from "next/link";
+const Signin = () => {
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const handleSignup = async (e: any) => {
+  const handleSignIn = async (e: any) => {
     e.preventDefault();
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
       // You can access the user information from userCredential.user
-      console.log("User signed up:", userCredential.user);
+      console.log("User signed in:", userCredential.user);
 
       // Redirect to another page or do any other navigation logic
       toast.success("You have been signed in");
@@ -37,8 +32,8 @@ const Signup = () => {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="bg-white p-8 rounded shadow-md w-96">
-        <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
-        <form onSubmit={handleSignup}>
+        <h2 className="text-2xl font-semibold mb-4">Sign In</h2>
+        <form onSubmit={handleSignIn}>
           <div className="mb-4">
             <label htmlFor="email" className="block text-sm font-medium text-gray-600">
               Email:
@@ -48,7 +43,7 @@ const Signup = () => {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="mt-1 p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300 text-black"
+              className="mt-1 p-2 w-full border border-gray-300 rounded focus:outline-none focus:ring focus:border-blue-300  text-black"
               required
             />
           </div>
@@ -69,8 +64,10 @@ const Signup = () => {
             type="submit"
             className="bg-blue-500 text-white p-2 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
           >
-            Sign Up
+            Sign In
           </button>
+          <h1 className="text-black">Not registered yet?</h1>
+          <Link href={'/signup'} className="text-black underline">Sign Up</Link>
         </form>
         {error && <p className="text-red-500 mt-4">{error}</p>}
       </div>
@@ -78,4 +75,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Signin;
